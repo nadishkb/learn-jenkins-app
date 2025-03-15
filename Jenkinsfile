@@ -13,6 +13,7 @@ pipeline{
                 sh '''
                 ls -la
                 echo "buid started"
+                npm install
                 node --version
                 npm --version
                 npm ci
