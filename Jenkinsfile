@@ -45,7 +45,7 @@ pipeline{
 
             steps{
                 sh '''
-                npm install -g serve
+                sudo npm install -g serve
                 sudo serve -s build&
                 npm playwright test
                 '''
