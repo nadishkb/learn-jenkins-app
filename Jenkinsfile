@@ -1,12 +1,15 @@
 pipeline{
+    agent any
+    /*
     agent{
         docker{
              image 'node:18-alpine'
              reuseNode true
         }
     }
+    */
 
-    stages{
+    stages{  /*
         stage('Build'){
             steps{
                 sh '''
@@ -31,7 +34,7 @@ pipeline{
             }  
         }
 
-
+        */
         stage('E2E'){
             agent{
                 docker{
