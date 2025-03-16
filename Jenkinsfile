@@ -30,11 +30,24 @@ pipeline{
                 '''
             }  
         }
+
+
+        stage('E2E'){
+            agent{
+                image "mcr.microsoft.com/playwright:v1.50.0-noble"
+            }
+
+            steps{
+                npm install -g serve
+                sudo serve -s build &
+                npm playwright test
+            }
+        }
     }
 
     post{
         always{
-            junit "test-results/junit.xml"
+            junit "jest-results/junit.xml"
         }
     }
 }
