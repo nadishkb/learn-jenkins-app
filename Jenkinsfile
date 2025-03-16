@@ -1,7 +1,7 @@
 pipeline{
     agent any
 
-    stages{ 
+    stages{ /*
         stage('Build'){
             agent{
                  docker{
@@ -39,7 +39,7 @@ pipeline{
             }  
         }
 
-        
+        */
         stage('E2E'){
             agent{
                 docker{
@@ -53,7 +53,8 @@ pipeline{
                 npm install serve
                 node_modules/.bin/serve -s build&
                 sleep 5
-                npx playwright test
+                #npx playwright test
+                npx playwright test --reporter=html
                 '''
             }
         }
@@ -62,6 +63,8 @@ pipeline{
     post{
         always{
             junit "jest-results/junit.xml"
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'npx HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, icon: '', keepAll: false, reportDir: 'jest-results', reportFiles: 'junit.xml', reportName: 'XML Report', reportTitles: '', useWrapperFileDirectly: true])
         }
     }
 }
