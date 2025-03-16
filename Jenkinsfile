@@ -1,16 +1,14 @@
 pipeline{
     agent any
-    /*
-    agent{
-        docker{
-             image 'node:18-alpine'
-             reuseNode true
-        }
-    }
-    */
 
-    stages{  /*
+    stages{ 
         stage('Build'){
+            agent{
+                 docker{
+                     image 'node:18-alpine'
+                     reuseNode true
+                }
+            }
             steps{
                 sh '''
                 ls -la
@@ -25,6 +23,13 @@ pipeline{
             }
         }       
         stage('Test'){
+            agent{
+                docker{
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+    
             steps{
                 sh '''
                 echo "Test stage"
@@ -34,7 +39,7 @@ pipeline{
             }  
         }
 
-        */
+        
         stage('E2E'){
             agent{
                 docker{
@@ -47,6 +52,7 @@ pipeline{
                 sh '''
                 npm install serve
                 node_modules/.bin/serve -s build&
+                sleep 5
                 npx playwright test
                 '''
             }
