@@ -34,7 +34,9 @@ pipeline{
 
         stage('E2E'){
             agent{
-                image "mcr.microsoft.com/playwright:v1.50.0-noble"
+                docker{
+                    image "mcr.microsoft.com/playwright:v1.50.0-noble"
+                }              
             }
 
             steps{
