@@ -1,7 +1,7 @@
 pipeline{
     agent any
 
-    stages{ /*
+    stages{
         stage('Build'){
             agent{
                  docker{
@@ -39,7 +39,7 @@ pipeline{
             }  
         }
 
-        */
+    
         stage('E2E'){
             agent{
                 docker{
